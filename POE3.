@@ -1,0 +1,266 @@
+import javax.swing.JOptionPane;
+import java.util.Scanner;
+
+
+
+
+
+public class Portfolio {
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final String[] usernames = new String[5];
+    private static final String[] passwords = new String[5];
+    private static int userCount = 0;
+
+    public static void main(String[] args) {
+        createUserAccounts();
+        loginUser();
+    }
+
+    public static void createUserAccounts() {
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Please open an account : ");
+            System.out.println("Please enter a username :  ");
+            String username = scanner.nextLine();
+
+            // Please Check username format for confirmation.
+            if (!isValidUsername(username)) {
+                System.out.println(" The username may not correctly formatted, please do check that your username contains an underscore and is no more than 5 characters in length.");
+                continue;
+            }
+
+            System.out.print("Enter your password: ");
+            String password = scanner.nextLine();
+
+
+            //  Please Check the password complexity for confirmation.
+            if (!isValidPassword(password)) {
+                System.out.println("Password is not correctly formatted, please ensure that the password contains at least 8 characters, a capital letter, a number, and a special character.");
+                continue;
+            }
+
+            usernames[userCount] = username;
+            passwords[userCount] = password;
+            userCount++;
+        }
+    }
+
+    public static void loginUser() {
+        System.out.println("please Login to your account:");
+        System.out.println("please Enter A username: ");
+        String username = scanner.nextLine();
+        System.out.println("please Enter A password: ");
+        String password = scanner.nextLine();
+
+        // Please Verify the login details for confirmation. 
+        boolean loginSuccessful = false;
+        for (int i = 0; i < userCount; i++) {
+            if (usernames[i].equals(username) && passwords[i].equals(password)) {
+                loginSuccessful = true;
+                break;
+            }
+        }
+
+        if (loginSuccessful) {
+            System.out.println("Welcome back! , user");
+        } else {
+            System.out.println("The Username or Password incorrect, please try again.");
+        }
+    }
+
+    public static boolean isValidUsername(String username) {
+        return username.length() <= 5 && username.contains("_");
+    }
+
+    //Stack overflow..
+    public static boolean isValidPassword(String password) {
+        return password.length() >= 8 && password.matches(".*[A-Z].*") && password.matches(".*[0-9]*") && password.matches(".*[@#$%^&+=].*");
+    }
+ 
+class Tasks {//The first thing is to declare all the variables that are to be used .
+    private String tasksName;
+    private String developersFirstName;
+    private String developersLastName;
+    private double durationHours;
+    private String tasksStatus;
+//This will be use to refer to the variables declared. 
+    public Tasks(String taskName, String developerFirstName, String developerLastName, double durationHours) {
+        this.tasksName = taskName;
+        this.developersFirstName = developersFirstName;
+        this.developersLastName = developersLastName;
+        this.durationHours = durationHours;
+        this.tasksStatus = "To Do"; 
+    }
+// the boolean will ensure to calculate the length is not more than 50 characters.
+    public boolean checkTaskDescription() {
+        return tasksName.length() <= 50;
+    }
+// this method creates and returns the taskID.
+    public String createTaskID() {
+        String initials = tasksName.substring(0, 2).toUpperCase();
+        String devInitials = developersLastName.substring(developersLastName.length() - 3).toUpperCase();
+        return initials + ":" + devInitials;
+    }
+//This method returns the tasks full task details of each task. 
+    public String printTaskDetails() {
+        return "Tasks Status: " + tasksStatus +
+                "\nDeveloper Details: " + developersFirstName + " " + developersLastName +
+                "\nTask Number: " + createTaskID() +
+                "\nTask Name: " + tasksName +
+                "\nTask Description: " + tasksName +
+                "\nTask ID: " + createTaskID() +
+                "\nDuration: " + durationHours + " hours";
+    }
+// this method returns the total combined hours of all entered tasks.
+    public double returnTotalHours() {
+        return durationHours;
+    }
+// this methods sets out the status of each task.
+    public void setTaskStatus(String status) {
+        this.tasksStatus = status;
+    }
+}
+
+public class portfolio {
+    public static void main(String[] args) {
+        int numTasks = Integer.parseInt(JOptionPane.showInputDialog("Enter the number of tasks you have :"));
+        Tasks[] tasks = new Tasks[numTasks];
+        double totalHours = 0;
+//the for loop aids to check the umber of tasks and increment each time the user adds TASK.
+        for (int i = 0; i < numTasks; i++) {
+            String tasksName = JOptionPane.showInputDialog("Please enter the task name:");
+            String developersFirstName = JOptionPane.showInputDialog("Please enter the  developer's first name:");
+            String developersLastName = JOptionPane.showInputDialog("Please enter the  developer's last name:");
+            double durationHours = Double.parseDouble(JOptionPane.showInputDialog("please input task duration (hours):"));
+//the if statement is in the inner structure and works to open the GUI to allow user to enter task.
+         static Tasks task  = new Tasks(tasksName, developersFirstName, developersLastName, durationHours);
+            if (task.checkTaskDescription()); {
+ {
+        int i;
+                tasks[i] = task;
+                totalHours += durationHours;
+                task.setTaskStatus(JOptionPane.showInputDialog("please choose task status in the following choices: (To Do/Done/Doing):"));
+            } else {
+// Retry entering the task again if it did not work,TRY AGAIN PLEASE!. 
+                JOptionPane.showMessageDialog(null, "Please input a task description of less than 50 characters");
+                i--; 
+            }
+        }
+//this will work too show (display) all the information provided by the user 
+        StringBuilder allTaskDetails = new StringBuilder("All of the  Task Details:\n");
+        for (Tasks task ; tasks) {
+            if (task != null) {
+                allTaskDetails.append(task.printTaskDetails()).append("\n\n");
+            }
+        }
+//this will work to display the total hours combined in the tasks.
+        JOptionPane.showMessageDialog(null, allTaskDetails.toString() +
+                "This is the total of combined hours: " + totalHours + " HOURS");
+    }
+    class portfolio {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Initialize arrays to store task-related information
+        String[] developers;
+        String[] taskNames;
+        int[] taskIDs;
+        double[] taskDurations;
+        String[] taskStatuses;
+
+        // Get the number of tasks from the user
+        System.out.print("Enter the number of tasks: ");
+        int numTasks = scanner.nextInt();
+
+        // Initialize arrays with the given number of tasks
+        developers = new String[numTasks];
+        taskNames = new String[numTasks];
+        taskIDs = new int[numTasks];
+        taskDurations = new double[numTasks];
+        taskStatuses = new String[numTasks];
+
+        // Populate arrays with user input
+        for (int i = 0; i < numTasks; i++) {
+            System.out.println("\nTask " + (i + 1));
+            scanner.nextLine(); // Consume newline
+            System.out.print("Enter developer name: ");
+            developers[i] = scanner.nextLine();
+            System.out.print("Enter task name: ");
+            taskNames[i] = scanner.nextLine();
+            System.out.print("Enter task ID: ");
+            taskIDs[i] = scanner.nextInt();
+            System.out.print("Enter task duration (hours): ");
+            taskDurations[i] = scanner.nextDouble();
+            scanner.nextLine(); // Consume newline
+            System.out.print("Enter task status (To Do/Done/Doing): ");
+            taskStatuses[i] = scanner.nextLine();
+        }
+
+        //  Display tasks with status "Done"
+        System.out.println("\nTasks with status 'Done':");
+        for (int i = 0; i < numTasks; i++) {
+            if (taskStatuses[i].equalsIgnoreCase("Done")) {
+                System.out.println("Developer: " + developers[i] +
+                        ", Task Name: " + taskNames[i] +
+                        ", Duration: " + taskDurations[i] + " hours");
+            }
+        }
+
+        //  Find the task with the longest duration
+        double maxDuration = 0;
+        String longestTaskDeveloper = "";
+        for (int i = 0; i < numTasks; i++) {
+            if (taskDurations[i] > maxDuration) {
+                maxDuration = taskDurations[i];
+                longestTaskDeveloper = developers[i];
+            }
+        }
+        System.out.println("\nTask with longest duration:");
+        System.out.println("Developer: " + longestTaskDeveloper +
+                ", Duration: " + maxDuration + " hours");
+
+        //  Search for a task by name
+        System.out.print("\nEnter a task name to search: ");
+        String searchTaskName = scanner.nextLine();
+        boolean found = false;
+        for (int i = 0; i < numTasks; i++) {
+            if (taskNames[i].equalsIgnoreCase(searchTaskName)) {
+                System.out.println("Task Name: " + taskNames[i] +
+                        ", Developer: " + developers[i] +
+                        ", Status: " + taskStatuses[i]);
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("Task not found.");
+        }
+
+        //  Search for tasks assigned to a developer
+        System.out.print("\nEnter a developer name to search: ");
+        String searchDeveloper = scanner.nextLine();
+        System.out.println("Tasks assigned to " + searchDeveloper + ":");
+        for (int i = 0; i < numTasks; i++) {
+            if (developers[i].equalsIgnoreCase(searchDeveloper)) {
+                System.out.println("Task Name: " + taskNames[i] +
+                        ", Status: " + taskStatuses[i]);
+            }
+        }
+
+        //  Delete a task by name
+        System.out.print("\nEnter a task name to delete: ");
+        String deleteTaskName = scanner.nextLine();
+        for (int i = 0; i < numTasks; i++) {
+            if (taskNames[i].equalsIgnoreCase(deleteTaskName)) {
+                taskNames[i] = ""; // Mark the task as deleted
+                System.out.println("Task '" + deleteTaskName + "' deleted.");
+                break;
+            }
+        }
+
+        //  Display a report with all task details
+        System.out.println("\nAll Task Details:");
+        for (int i = 0; i < numTasks; i++) {
+            if (!taskNames[i].isEmpty()) // Exclude deleted tasks
+                System.out.println("Task Name: " + taskNames[i] +
+                        ", Developer: " + developers[i] +
+                        ", Duration: " + taskDurations[i] + "hours" +
